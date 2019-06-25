@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Hello from first!</h1>
+  <a href="/second">Go to second!</a>
+  <button id="info-button">
+    Get Info!
+  </button>
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+  <script>
+    $("button").on("click", async function(){
+      console.log("ABOUT TO REQUEST!")
+      const response = await axios.get("/send-back?info=hello")
+      console.log("RESPONSE GIVEN!")
+      console.log("response from server!", response.data)
+      $("body").append(`<div>${response.data.result}</div>`)
+    })
+  </script>
+</body>
+</html>

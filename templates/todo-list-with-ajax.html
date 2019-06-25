@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <ul id="todo-container">
+
+    </ul>
+   <form>
+    <label for="task">Task:</label>
+    <input type="text" name="task" id="task">
+    <button>Add Todo!</button>
+  </form>
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+  <script>
+    $("form").on("submit", async function(evt){
+      evt.preventDefault()
+      const newTodo = $("#task").val()
+      const response = await axios.post("/todos-with-ajax", {
+        task: newTodo
+      })
+      const newLi = $("<li>")
+      newLi.text(response.data.newTodo)
+      $("#todo-container").append(newLi)
+      $("form").trigger("reset")
+    })
+  </script>
+</body>
+</html>
